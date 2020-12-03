@@ -11,7 +11,7 @@ const patternStyle = [
 
 const itemStyle = [
 	'		{ "trigger": "%nativeName", "contents": "%nativeName(%nativeArgs)" },',
-	'	"%nativeName": {\n		"prefix": "%nativeName",\n		"body": [\n			"%nativeName(%nativeArgs)"\n		]\n	},',
+	'	"%nativeName": {\n		"prefix": "%nativeName",\n		"body": [\n			"%nativeName(%nativeArgs)"\n		],\n		"description": %description\n	},',
 	"  '%nativeName':\n    'prefix': '%nativeName'\n    'body': '%nativeName(%nativeArgs)'"
 ]
 
@@ -42,6 +42,7 @@ request('https://runtime.fivem.net/doc/natives.json', function (err, response, c
 			}
 
 			nativeStr = nativeStr.replace(/%nativeArgs/g, paramStr);
+			nativeStr = nativeStr.replace(/%description/g, JSON.stringify(nativeData.description.replace(/\`\`\`/g, "")))
 			_strCompletions += nativeStr + "\n";
 		}
 	}
